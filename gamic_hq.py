@@ -135,6 +135,14 @@ async def worker():
 
                 logger.info('Add referral code')
                 referrer_code = await add_ref(client, email)
+                
+                logger.info('Joining the GamicHQ community')
+                response = await client.post('https://gamic.app/api/guild/join/community/20', data={})
+                check((await response.json())['message'])
+
+                logger.info('Joining the Gamic Gaming community')
+                response = await client.post('https://gamic.app/api/guild/join/community/10', data={})
+                check((await response.json())['message'])
 
                 logger.info('Bind email')
                 response = await client.post('https://gamic.app/api/user/bindEmailSend',
